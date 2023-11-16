@@ -1,5 +1,6 @@
-package DAO;
+package com.sistema.DAO.DAO;
 
+import DAO.connectionfactory;
 import controle.Cliente;
 
 import java.sql.Connection;
@@ -27,7 +28,8 @@ public class clienteDAO {
             stmt.setString(4, cliente.getEmail());
             stmt.setDate(6,new java.sql.Date(cliente.getDataNascimento().getTime())); ;
         } catch (SQLException ex) {
-            Logger.getLogger(clienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+           
+            
         }
     }
 }
