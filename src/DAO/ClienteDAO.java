@@ -66,21 +66,21 @@ public class ClienteDAO extends Cliente{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
         
-
-    void removerCliente(String string) {
-        try {
-            String sql = "delete from usuario where cpf = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, codigo);
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException ex) {
+    /**
+     *
+     */
+    public  void removerCliente() {
+        String sql = "delete from usuario where cpf = ?";
+        statement.setString(1, String.valueOf(cpf));
+        statement.execute();
+        statement.close();
+        if (connection != null) {
+            connection.close(); // Certifique-se de fechar a conexão no final
         }
-            
-         }
-    }
+    
 
-    //public ArrayList<Cliente> obterTodosClientes() {
+}
+}
+ //public ArrayList<Cliente> obterTodosClientes() {
     //    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
    // }
-//}
