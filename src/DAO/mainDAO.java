@@ -1,9 +1,5 @@
 package DAO;
 
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import com.sistema.paginas.Tela_Inicial;
 import controle.Cliente;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,12 +12,13 @@ public class mainDAO {
     public static void main(String[] args) {
         core.iniciar();
 
-        ClienteDAO cliente = new ClienteDAO();
+        Cliente cliente = new Cliente();
         cliente.setNome("teste");
         cliente.setCpf("12345678901");
         cliente.setEmail("teste@example.com");
         cliente.setCelular("(12) 3456-7890");
         cliente.setSenha("senhateste");
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date dataNascimento = sdf.parse("1990-01-01");
@@ -30,10 +27,9 @@ public class mainDAO {
             System.err.println("Erro ao converter data de nascimento: " + e.getMessage());
         }
 
-        cliente.inserirCliente();
+        clienteDAO.inserirCliente(cliente);
 
-        Cliente clienteObtido;
-        clienteObtido = clienteDAO.obterClienteByCPF("12345678901");
+        Cliente clienteObtido = clienteDAO.obterClienteByCPF("12345678901");
         if (clienteObtido != null) {
             System.out.println("Cliente obtido: " + clienteObtido.getNome());
 
@@ -49,8 +45,8 @@ public class mainDAO {
             clienteDAO.removerCliente("12345678901");
         }
 
-        System.out.println("Clientes após remoção:");
-        ArrayList<Cliente> clientes = clienteDAO.obterTodosClientes();
+        // Implemente ou remova conforme necessário
+        // ArrayList<Cliente> clientes = clienteDAO.obterTodosClientes();
     }
 
     public static Core getCore() {
@@ -58,12 +54,11 @@ public class mainDAO {
     }
 
     private static class Core {
-
         public Core() {
         }
 
         private void iniciar() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 }
