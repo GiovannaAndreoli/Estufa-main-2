@@ -1,4 +1,3 @@
-
 package com.sistema.paginas;
 
 import java.awt.Color;
@@ -7,15 +6,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-
 public class Tela_CadastroInvalido extends javax.swing.JFrame {
 
-   
     public Tela_CadastroInvalido() {
         initComponents();
     }
 
-              class JPanelGradient extends JPanel {
+    class JPanelGradient extends JPanel {
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -30,6 +27,7 @@ public class Tela_CadastroInvalido extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,10 +92,9 @@ public class Tela_CadastroInvalido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-                //new Tela_Cadastro().setVisible(true);
+        //new Tela_Cadastro().setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
 
     public static void main(String args[]) {
 

@@ -2,11 +2,11 @@ package com.sistema.paginas;
 
 
 
+import DAO.ClienteDAO;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import com.sistema.Cliente;
 import com.sistema.Core;
 import com.sistema.Main;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 public class Tela_Cadastro extends javax.swing.JFrame {
@@ -226,15 +228,17 @@ public class Tela_Cadastro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-        	Cliente cliente = new Cliente();
+            ClienteDAO cliente = new ClienteDAO();
             cliente.setCelular(txtCelular.getText());
             cliente.setCpf(txtCpf.getText());
-            cliente.setDataNascimento(new Date(txtData_Nasc.getText()));
+            cliente.setDataNascimento(new java.sql.Date(new java.util.Date(txtData_Nasc.getText()).getTime()));
             cliente.setEmail(txtEmail.getText());
             cliente.setNome(txtNome.getText());
-            cliente.setSenha(txtSenha.getText());
-            Core.criarUsuario(cliente);
+            cliente.setSenha(String.valueOf(txtSenha.getPassword()));
+            //Core.criarUsuario(cliente);
+            cliente.inserirCliente();
         }catch(Exception e) {
+            System.out.println(e);
         	new Tela_CadastroInvalido().setVisible(true);
         }
         
