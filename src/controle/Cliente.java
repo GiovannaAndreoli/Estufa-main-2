@@ -10,7 +10,7 @@ public class Cliente {
 
     private int cliente_id;
     private String nome;
-    private String cpf;
+    public String cpf;
     private String email;
     private String celular;
     private String senha;

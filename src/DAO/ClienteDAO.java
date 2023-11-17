@@ -37,7 +37,7 @@ public class ClienteDAO extends Cliente{
         }
     }
 
-    Cliente obterClienteByCPF() {
+    String obterClienteByCPF() {
         Connection connection = connectionfactory.getConnection();
      
         try {
@@ -59,7 +59,7 @@ public class ClienteDAO extends Cliente{
                 e.printStackTrace();
             }
         }   
-        } 
+        } return cpf;
     }
     
     public void alterarCliente(Cliente clienteObtido) {
@@ -68,10 +68,19 @@ public class ClienteDAO extends Cliente{
         
 
     void removerCliente(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "delete from usuario where cpf = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, codigo);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException ex) {
+        }
+            
+         }
     }
 
-    public ArrayList<Cliente> obterTodosClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
+    //public ArrayList<Cliente> obterTodosClientes() {
+    //    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   // }
+//}

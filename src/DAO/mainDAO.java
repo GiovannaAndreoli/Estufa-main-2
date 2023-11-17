@@ -32,7 +32,8 @@ public class mainDAO {
 
         cliente.inserirCliente();
 
-        Cliente clienteObtido = clienteDAO.obterClienteByCPF("12345678901");
+        Cliente clienteObtido;
+        clienteObtido = clienteDAO.obterClienteByCPF("12345678901");
         if (clienteObtido != null) {
             System.out.println("Cliente obtido: " + clienteObtido.getNome());
 
