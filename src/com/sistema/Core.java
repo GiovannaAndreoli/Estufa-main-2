@@ -213,8 +213,8 @@ public class Core {
 	}
 
 	public static Cliente fazerLogin(String cpf, String senha) {
-
-		Cliente clienteEncontrado = procurarClienteByCPF(cpf);
+            
+		Cliente clienteEncontrado = new Cliente();
 
 		if (clienteEncontrado != null && clienteEncontrado.verificarSenha(senha)) {
 			Main.getCore().criarSessao(clienteEncontrado).mudarDePagina(PAGINA_PRINCIPAL);

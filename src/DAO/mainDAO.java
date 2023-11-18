@@ -4,15 +4,15 @@ import controle.Cliente;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class mainDAO {
-    private static ClienteDAO clienteDAO = new ClienteDAO();
     private static Core core = new Core();
 
     public static void main(String[] args) {
         core.iniciar();
 
-        Cliente cliente = new Cliente();
+        ClienteDAO cliente = new ClienteDAO();
         cliente.setNome("teste");
         cliente.setCpf("12345678901");
         cliente.setEmail("teste@example.com");
@@ -27,26 +27,27 @@ public class mainDAO {
             System.err.println("Erro ao converter data de nascimento: " + e.getMessage());
         }
 
-        clienteDAO.inserirCliente(cliente);
-
-        Cliente clienteObtido = clienteDAO.obterClienteByCPF("12345678901");
+        cliente.inserirCliente();
+        ClienteDAO clienteDao = new ClienteDAO();
+        Cliente clienteObtido = clienteDao.obterClienteByCPF("12345678901");
+        
         if (clienteObtido != null) {
             System.out.println("Cliente obtido: " + clienteObtido.getNome());
 
-            // Verifique se o cliente não é nulo antes de realizar operações
+            
             clienteObtido.setNome("Novo Nome");
-            clienteDAO.alterarCliente(clienteObtido);
+            clienteDao.alterarCliente(clienteObtido);
         } else {
             System.out.println("Cliente não encontrado.");
         }
 
-        // Verifique se o cliente não é nulo antes de remover
+        
         if (clienteObtido != null) {
-            clienteDAO.removerCliente("12345678901");
+            clienteDao.removerCliente("12345678901");
         }
 
-        // Implemente ou remova conforme necessário
-        // ArrayList<Cliente> clientes = clienteDAO.obterTodosClientes();
+        
+         List<Cliente> clientes = clienteDao.obterTodosClientes();
     }
 
     public static Core getCore() {

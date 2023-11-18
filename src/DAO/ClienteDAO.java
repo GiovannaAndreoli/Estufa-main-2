@@ -8,20 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO {
+public class ClienteDAO extends Cliente {
 
-    public void inserirCliente(Cliente cliente) {
+    public void inserirCliente() {
         Connection connection = connectionfactory.getConnection();
         try {
             String sql = "INSERT INTO cliente (nome, cpf, email, celular, senha, data_nasc) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, cliente.getNome());
-                statement.setString(2, cliente.getCpf());
-                statement.setString(3, cliente.getEmail());
-                statement.setString(4, cliente.getCelular());
-                statement.setString(5, cliente.getSenha());
-                statement.setDate(6, new java.sql.Date(cliente.getDataNascimento().getTime()));
+                statement.setString(1, this.getNome());
+                statement.setString(2, this.getCpf());
+                statement.setString(3, this.getEmail());
+                statement.setString(4, this.getCelular());
+                statement.setString(5, this.getSenha());
+                statement.setDate(6, new java.sql.Date(this.getDataNascimento().getTime()));
 
                 statement.executeUpdate();
             }
@@ -47,6 +47,44 @@ public class ClienteDAO {
 
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, cpf);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        cliente = new Cliente();
+                        cliente.setCpf(resultSet.getString("cpf"));
+                        cliente.setNome(resultSet.getString("nome"));
+                        cliente.setEmail(resultSet.getString("email"));
+                        cliente.setCelular(resultSet.getString("celular"));
+                        cliente.setSenha(resultSet.getString("senha"));
+                        cliente.setDataNascimento(resultSet.getDate("data_nasc"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return cliente;
+    }
+    
+    public Cliente Autenticar() {
+        Connection connection = connectionfactory.getConnection();
+        Cliente cliente = null;
+
+        try {
+            String sql = "SELECT * FROM cliente WHERE cpf=? AND senha=?";
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, this.getCpf());
+                statement.setString(2, this.getSenha());
 
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
