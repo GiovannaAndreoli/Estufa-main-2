@@ -2,6 +2,7 @@ package com.sistema.paginas;
 
 
 
+import DAO.ClienteDAO;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -137,8 +138,7 @@ public class Tela_Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-    	//Core.fazerLogin(txtCpf.getText(), String.valueOf(jPasswordField1.getPassword()));
-        
+    	Core.fazerLogin(txtCpf.getText(), String.valueOf(jPasswordField1.getPassword()));
     	dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
 

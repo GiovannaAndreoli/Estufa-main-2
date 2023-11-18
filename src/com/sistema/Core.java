@@ -1,5 +1,6 @@
 package com.sistema;
 
+import DAO.ClienteDAO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -214,9 +215,13 @@ public class Core {
 
 	public static Cliente fazerLogin(String cpf, String senha) {
             
+            
 		Cliente clienteEncontrado = new Cliente();
-
-		if (clienteEncontrado != null && clienteEncontrado.verificarSenha(senha)) {
+                ClienteDAO clienteDao = new ClienteDAO();
+                clienteDao.setCpf(cpf);
+                clienteDao.setSenha(senha);
+                clienteEncontrado = clienteDao.Autenticar();
+		if (clienteEncontrado != null) {
 			Main.getCore().criarSessao(clienteEncontrado).mudarDePagina(PAGINA_PRINCIPAL);
 			return clienteEncontrado;
 		} else {

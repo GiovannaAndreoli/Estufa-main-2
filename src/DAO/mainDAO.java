@@ -1,6 +1,6 @@
 package DAO;
 
-import controle.Cliente;
+import com.sistema.Cliente;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

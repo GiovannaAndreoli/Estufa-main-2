@@ -1,6 +1,6 @@
 package DAO;
 
-import controle.Higrometro;
+import com.sistema.Higrometro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

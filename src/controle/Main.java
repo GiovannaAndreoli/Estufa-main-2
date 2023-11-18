@@ -1,5 +1,7 @@
 package controle;
 
+import com.sistema.Cliente;
+import com.sistema.Higrometro;
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -81,8 +83,8 @@ public class Main {
     public static void criarUsuario(ArrayList<Cliente> clienteList) {
         Cliente cliente = new Cliente();
         cliente.cadastrarCliente();
-        cliente.cadastrarSenha();
-        cliente.cadastrarDataNascimento();
+        //cliente.cadastrarSenha();
+        //cliente.cadastrarDataNascimento();
         clienteList.add(cliente);
         if (cliente.validarCadastro()) {
             clienteList.add(cliente);
@@ -149,7 +151,7 @@ public class Main {
                     tiposPlantio.get(0)
             );
 
-            Higrometro higrometro = clienteLogado.getHigrometro(tipoPlanta);
+            com.sistema.Higrometro higrometro = clienteLogado.getHigrometro(tipoPlanta);
 
             if (higrometro != null) {
                 higrometro.imprimir();
@@ -163,7 +165,7 @@ public class Main {
 
     public static void adicionarOuAlterarDadosPlantio(Cliente clienteLogado) {
         String tipoPlanta = JOptionPane.showInputDialog("Qual o cultivo você deseja adicionar/alterar os dados:");
-        Higrometro higrometro = clienteLogado.getHigrometro(tipoPlanta);
+        com.sistema.Higrometro higrometro = clienteLogado.getHigrometro(tipoPlanta);
 
         if (higrometro == null) {
             higrometro = new Higrometro(tipoPlanta);
