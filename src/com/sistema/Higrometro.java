@@ -10,10 +10,19 @@ public class Higrometro {
     private double umidadeAr;
     private double umidadeSolo;
 
+    public Higrometro()
+    {
+        
+    }
+    
     public Higrometro(String nomeCultivo) {
         this.nomeCultivo = nomeCultivo;
     }
 
+    public void setNomeCultivo(String nomeCultivo) {
+        this.nomeCultivo = nomeCultivo;
+    }
+    
     public String getNomeCultivo() {
         return this.nomeCultivo;
     }
@@ -135,5 +144,9 @@ public class Higrometro {
         	listaAlerta.add("Umidade do solo ideal!\n");
         }
     	return listaAlerta;
+    }
+
+    public void adicionarHigrometro(Higrometro higrometro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

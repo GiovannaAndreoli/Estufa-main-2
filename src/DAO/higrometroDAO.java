@@ -1,42 +1,34 @@
 package DAO;
 
-import com.sistema.Higrometro;
+import com.sistema.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class higrometroDAO {
+public class higrometroDAO extends Higrometro {
 
-    public static void inserirHigrometro(Higrometro higrometro) {
-        PreparedStatement stmt = null;
-        Connection conexao = null;
-
+    public void inserirHigrometro() {
+        
+        Connection connection = connectionfactory.getConnection();
+        
         try {
+            String sql = "INSERT INTO higrometro (temp_interna, "
+                    + "temp_externa, umid_ar, umid_solo) "
+                    + "VALUES (?, ?, ?, ?)";
             
+            PreparedStatement statement = connection.prepareStatement(sql);
             
-            Connection root = null;
-            Connection connection = root;
-
-            String sql = "INSERT INTO higrometros (nome_cultivo, temperatura_interna, temperatura_externa, umidade_ar, umidade_solo) VALUES (?, ?, ?, ?, ?)";
-
-            stmt = conexao.prepareStatement(sql);
-            stmt.setString(1, higrometro.getNomeCultivo());
-            stmt.setDouble(2, higrometro.getTemperaturaInterna());
-            stmt.setDouble(3, higrometro.getTemperaturaExterna());
-            stmt.setDouble(4, higrometro.getUmidadeAr());
-            stmt.setDouble(5, higrometro.getUmidadeSolo());
+            statement = connection.prepareStatement(sql);
+            //statement.setString(1, this.getNomeCultivo());
+            statement.setDouble(1, this.getTemperaturaInterna());
+            statement.setDouble(2, this.getTemperaturaExterna());
+            statement.setDouble(3, this.getUmidadeAr());
+            statement.setDouble(4, this.getUmidadeSolo());
             
-            stmt.executeUpdate();
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
+ 
 }

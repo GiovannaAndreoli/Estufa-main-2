@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
+import DAO.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -237,13 +237,23 @@ public class Tela_DadosCultivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarAncestorAdded
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-    	if(cliente.getHigrometro(plantio) == null) {
-	    	Higrometro higrometro = new Higrometro(plantio);
+    	higrometroDAO higrometro = new higrometroDAO();
+        higrometro.setNomeCultivo(plantio);
+        higrometro.setTemperaturaExterna(Double.parseDouble(txtTempExterna.getText()));
+        higrometro.setTemperaturaInterna(Double.parseDouble(txtTempInterna.getText()));
+        higrometro.setUmidadeAr(Double.parseDouble(txtUmdExterna.getText()));
+        higrometro.setUmidadeSolo(Double.parseDouble(txtUmdInterna.getText()));
+        cliente.adicionarHigrometro(higrometro);
+        higrometro.inserirHigrometro();
+        /*
+        if(cliente.getHigrometro(plantio) == null) {
+	    	higrometroDAO higrometro = new higrometroDAO();
 	    	higrometro.setTemperaturaExterna(Double.parseDouble(txtTempExterna.getText()));
 	    	higrometro.setTemperaturaInterna(Double.parseDouble(txtTempInterna.getText()));
 	    	higrometro.setUmidadeAr(Double.parseDouble(txtUmdExterna.getText()));
 	    	higrometro.setUmidadeSolo(Double.parseDouble(txtUmdInterna.getText()));
 	    	cliente.adicionarHigrometro(higrometro);
+                higrometro.inserirHigrometro();
     	} else {
     		Higrometro higrometro = cliente.getHigrometro(plantio);
     		higrometro.setTemperaturaExterna(Double.parseDouble(txtTempExterna.getText()));
@@ -251,8 +261,8 @@ public class Tela_DadosCultivo extends javax.swing.JFrame {
 	    	higrometro.setUmidadeAr(Double.parseDouble(txtUmdExterna.getText()));
 	    	higrometro.setUmidadeSolo(Double.parseDouble(txtUmdInterna.getText()));
 	    	Core.refreshPaginas(cliente);
-	    	//cliente.adicionarHigrometro(higrometro);
-    	}
+	    	higrometro.adicionarHigrometro(higrometro);
+    	}*/
     	dispose();     
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
