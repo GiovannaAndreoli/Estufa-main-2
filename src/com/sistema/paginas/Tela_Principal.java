@@ -2,6 +2,7 @@ package com.sistema.paginas;
 
 
 
+import DAO.higrometroDAO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -28,6 +29,8 @@ import javax.swing.JComboBox;
 
 public class Tela_Principal extends javax.swing.JFrame {
 
+    public static Tela_Principal instance;
+    
     private Cliente cliente;
     
     public void setCliente(Cliente cliente) {
@@ -38,6 +41,18 @@ public class Tela_Principal extends javax.swing.JFrame {
     	return this.cliente;
     }
 
+    public void Atualizar()
+    {
+       higrometroDAO hig = new higrometroDAO();
+       Higrometro higrometro = hig.UltimoRegistro();
+       if(higrometro == null) return;
+       
+        tblTemperaturaExterna.setValueAt(higrometro.getTemperaturaExterna(), 0, 0);
+        tblTemperaturaInterna.setValueAt(higrometro.getTemperaturaInterna(), 0, 0);
+        tblUmidadeExterna.setValueAt(higrometro.getUmidadeAr(), 0, 0);
+        tblUmidadeInterna.setValueAt(higrometro.getUmidadeSolo(), 0, 0);
+    }
+    
     public Tela_Principal(Cliente cliente) {
     	setCliente(cliente);
         initComponents();
@@ -61,8 +76,9 @@ public class Tela_Principal extends javax.swing.JFrame {
         
         configurarCoresCabecalhosTabelas();
         
+        instance = this;
         
-       
+       Atualizar();
     }
 
     
@@ -200,6 +216,7 @@ private void configurarCoresCabecalhosTabelas() {
             }
         });
         tblUmidadeExterna.setToolTipText("Ideal: Entre 60 e 80%");
+        tblUmidadeExterna.setName("txtUmidExt"); // NOI18N
         tblUmidadeExterna.setSelectionBackground(new java.awt.Color(224, 236, 248));
         tblUmidadeExterna.setSelectionForeground(new java.awt.Color(102, 102, 102));
         tblUmidadeExterna.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -234,6 +251,7 @@ private void configurarCoresCabecalhosTabelas() {
             }
         });
         tblTemperaturaExterna.setToolTipText("Ideal: Entre 20 e 25 Cº");
+        tblTemperaturaExterna.setName("txtTempExt"); // NOI18N
         tblTemperaturaExterna.setSelectionBackground(new java.awt.Color(224, 236, 248));
         tblTemperaturaExterna.setSelectionForeground(new java.awt.Color(102, 102, 102));
         tblTemperaturaExterna.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -287,9 +305,9 @@ private void configurarCoresCabecalhosTabelas() {
         listPlantio.setBackground(new java.awt.Color(224, 236, 248));
         listPlantio.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         listPlantio.setModel(new javax.swing.AbstractListModel<String>() {
-            ArrayList<String> strings = cliente.getTiposPlantio();
-            public int getSize() { return strings.size(); }
-            public String getElementAt(int i) { return strings.get(i); }
+            String[] strings = { "Plantio 1", " ", "Plantio 2", " ", "Plantio 3", " ", "Plantio 4", " ", "..." };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         listPlantio.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -300,7 +318,6 @@ private void configurarCoresCabecalhosTabelas() {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        listPlantio.addListSelectionListener(new MyListSelectionListener());
         jScrollPane5.setViewportView(listPlantio);
 
         btnHistorico.setBackground(new java.awt.Color(204, 255, 204));
@@ -350,6 +367,7 @@ private void configurarCoresCabecalhosTabelas() {
             }
         });
         tblTemperaturaInterna.setToolTipText("Ideal: Entre 20 e 25 Cº");
+        tblTemperaturaInterna.setName("txtTempInt"); // NOI18N
         tblTemperaturaInterna.setSelectionBackground(new java.awt.Color(224, 236, 248));
         tblTemperaturaInterna.setSelectionForeground(new java.awt.Color(102, 102, 102));
         tblTemperaturaInterna.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -384,6 +402,7 @@ private void configurarCoresCabecalhosTabelas() {
             }
         });
         tblUmidadeInterna.setToolTipText("Ideal: Entre 60 e 80%");
+        tblUmidadeInterna.setName("txtUmidExt"); // NOI18N
         tblUmidadeInterna.setSelectionBackground(new java.awt.Color(224, 236, 248));
         tblUmidadeInterna.setSelectionForeground(new java.awt.Color(102, 102, 102));
         tblUmidadeInterna.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -468,10 +487,6 @@ private void configurarCoresCabecalhosTabelas() {
 
         lblTermometro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistema/img/temperatura.png"))); // NOI18N
 
-        lblGota.setIcon(new javax.swing.ImageIcon("/Users/thiagofaroribeiro/Desktop/ADS/Github/HigronoEconomy/src/main/java/img/umidade .png")); // NOI18N
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/thiagofaroribeiro/Desktop/ADS/Github/HigronoEconomy/src/main/java/img/regando-plantas .png")); // NOI18N
-
         lblPlanta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistema/img/planta.png"))); // NOI18N
 
         ComboBox_Dados.setBackground(new java.awt.Color(204, 255, 204));
@@ -483,8 +498,6 @@ private void configurarCoresCabecalhosTabelas() {
                 ComboBox_DadosActionPerformed(evt);
             }
         });
-        
-        
 
         jButton1.setBackground(new java.awt.Color(204, 255, 204));
         jButton1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -752,8 +765,13 @@ private void configurarCoresCabecalhosTabelas() {
             String plantio = (String) list.getSelectedValue();
 
             //Exibe o dado no label
-            Core.getPlantioInfo(cliente, plantio);
-            Higrometro higrometro = Core.getHigrometro(cliente, plantio);
+            //Core.getPlantioInfo(cliente, plantio);
+            //Higrometro higrometro = Core.getHigrometro(cliente, plantio);
+            
+            higrometroDAO hig = new higrometroDAO();
+            Higrometro higrometro = hig.UltimoRegistro();
+            if(higrometro == null) return;
+            
             tblTemperaturaExterna.setValueAt(higrometro.getTemperaturaExterna(), 0, 0);
             tblTemperaturaInterna.setValueAt(higrometro.getTemperaturaInterna(), 0, 0);
             tblUmidadeExterna.setValueAt(higrometro.getUmidadeAr(), 0, 0);

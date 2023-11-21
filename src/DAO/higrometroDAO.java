@@ -3,6 +3,7 @@ package DAO;
 import com.sistema.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class higrometroDAO extends Higrometro {
@@ -29,6 +30,39 @@ public class higrometroDAO extends Higrometro {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public Higrometro UltimoRegistro() {
+        Connection connection = connectionfactory.getConnection();
+        Higrometro higrometro = null;
+
+        try {
+            String sql = "SELECT * FROM Higrometro ORDER BY  id_higrometro DESC LIMIT 1";
+
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        higrometro = new Higrometro();
+                        higrometro.setTemperaturaInterna(resultSet.getDouble("temp_interna"));
+                        higrometro.setTemperaturaExterna(resultSet.getDouble("temp_externa"));
+                        higrometro.setUmidadeAr(resultSet.getDouble("umid_ar"));
+                        higrometro.setUmidadeSolo(resultSet.getDouble("umid_solo"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return higrometro;
     }
  
 }

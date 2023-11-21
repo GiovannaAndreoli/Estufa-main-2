@@ -245,6 +245,7 @@ public class Tela_DadosCultivo extends javax.swing.JFrame {
         higrometro.setUmidadeSolo(Double.parseDouble(txtUmdInterna.getText()));
         cliente.adicionarHigrometro(higrometro);
         higrometro.inserirHigrometro();
+        Tela_Principal.instance.Atualizar();
         /*
         if(cliente.getHigrometro(plantio) == null) {
 	    	higrometroDAO higrometro = new higrometroDAO();
