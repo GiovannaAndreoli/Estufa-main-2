@@ -46,7 +46,7 @@ public class Tela_Principal extends javax.swing.JFrame {
        higrometroDAO hig = new higrometroDAO();
        Higrometro higrometro = hig.UltimoRegistro();
        if(higrometro == null) return;
-       
+        
         tblTemperaturaExterna.setValueAt(higrometro.getTemperaturaExterna(), 0, 0);
         tblTemperaturaInterna.setValueAt(higrometro.getTemperaturaInterna(), 0, 0);
         tblUmidadeExterna.setValueAt(higrometro.getUmidadeAr(), 0, 0);
@@ -61,8 +61,6 @@ public class Tela_Principal extends javax.swing.JFrame {
         tblTemperaturaInterna.setRowHeight(82);
         tblUmidadeExterna.setRowHeight(82);
         tblUmidadeInterna.setRowHeight(82);
-        tblUltimaIrrigacao.setRowHeight(82);
-        tblPoximaIrrigacao.setRowHeight(82);
         tblAlertas.setRowHeight(44);
         
         CenteredCellRenderer centeredRenderer = new CenteredCellRenderer();
@@ -70,8 +68,6 @@ public class Tela_Principal extends javax.swing.JFrame {
         tblTemperaturaInterna.setDefaultRenderer(Double.class, centeredRenderer);
         tblUmidadeExterna.setDefaultRenderer(Double.class, centeredRenderer);
         tblUmidadeInterna.setDefaultRenderer(Double.class, centeredRenderer);
-        tblPoximaIrrigacao.setDefaultRenderer(String.class, centeredRenderer);
-        tblUltimaIrrigacao.setDefaultRenderer(String.class, centeredRenderer);
         tblAlertas.setDefaultRenderer(String.class, centeredRenderer);
         
         configurarCoresCabecalhosTabelas();
@@ -146,8 +142,6 @@ private void configurarCoresCabecalhosTabelas() {
     aplicarRenderizadorCabecalho(tblTemperaturaInterna, corCabecalho, fonteCabecalho);
     aplicarRenderizadorCabecalho(tblUmidadeExterna, corCabecalho, fonteCabecalho);
     aplicarRenderizadorCabecalho(tblUmidadeInterna, corCabecalho, fonteCabecalho);
-    aplicarRenderizadorCabecalho(tblPoximaIrrigacao, corCabecalho, fonteCabecalho);
-    aplicarRenderizadorCabecalho(tblUltimaIrrigacao, corCabecalho, fonteCabecalho);
     aplicarRenderizadorCabecalho(tblAlertas, corCabecalho, fonteCabecalho);
 }
     
@@ -167,20 +161,14 @@ private void configurarCoresCabecalhosTabelas() {
         tblAlertas = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         listPlantio = new javax.swing.JList<>();
-        btnHistorico = new javax.swing.JButton();
         lblPlantio = new javax.swing.JLabel();
         lblTemperatura = new javax.swing.JLabel();
         lblUmidade = new javax.swing.JLabel();
-        lblIrrigacao = new javax.swing.JLabel();
         lblAlertas = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblTemperaturaInterna = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblUmidadeInterna = new javax.swing.JTable();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tblPoximaIrrigacao = new javax.swing.JTable();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        tblUltimaIrrigacao = new javax.swing.JTable();
         lblAlerta = new javax.swing.JLabel();
         lblTermometro = new javax.swing.JLabel();
         lblGota = new javax.swing.JLabel();
@@ -320,18 +308,6 @@ private void configurarCoresCabecalhosTabelas() {
         });
         jScrollPane5.setViewportView(listPlantio);
 
-        btnHistorico.setBackground(new java.awt.Color(204, 255, 204));
-        btnHistorico.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
-        btnHistorico.setText("HISTÓRICO");
-        btnHistorico.setToolTipText("Histórico completo dos plantios");
-        btnHistorico.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnHistorico.setOpaque(true);
-        btnHistorico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoricoActionPerformed(evt);
-            }
-        });
-
         lblPlantio.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         lblPlantio.setText("PLANTIOS");
 
@@ -340,9 +316,6 @@ private void configurarCoresCabecalhosTabelas() {
 
         lblUmidade.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         lblUmidade.setText("UMIDADE");
-
-        lblIrrigacao.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
-        lblIrrigacao.setText("IRRIGAÇÃO");
 
         lblAlertas.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         lblAlertas.setText("ALERTAS");
@@ -417,72 +390,6 @@ private void configurarCoresCabecalhosTabelas() {
         });
         jScrollPane7.setViewportView(tblUmidadeInterna);
 
-        tblPoximaIrrigacao.setBackground(new java.awt.Color(224, 236, 248));
-        tblPoximaIrrigacao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblPoximaIrrigacao.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        tblPoximaIrrigacao.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "PRÓXIMA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblPoximaIrrigacao.setSelectionBackground(new java.awt.Color(224, 236, 248));
-        tblPoximaIrrigacao.setSelectionForeground(new java.awt.Color(102, 102, 102));
-        tblPoximaIrrigacao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblPoximaIrrigacao.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tblPoximaIrrigacaoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane8.setViewportView(tblPoximaIrrigacao);
-
-        tblUltimaIrrigacao.setBackground(new java.awt.Color(224, 236, 248));
-        tblUltimaIrrigacao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblUltimaIrrigacao.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
-        tblUltimaIrrigacao.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "ÚLTIMA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tblUltimaIrrigacao.setSelectionBackground(new java.awt.Color(224, 236, 248));
-        tblUltimaIrrigacao.setSelectionForeground(new java.awt.Color(102, 102, 102));
-        tblUltimaIrrigacao.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblUltimaIrrigacao.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tblUltimaIrrigacaoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane9.setViewportView(tblUltimaIrrigacao);
-
         lblAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistema/img/ponto-de-exclamacao.png"))); // NOI18N
 
         lblTermometro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistema/img/temperatura.png"))); // NOI18N
@@ -522,11 +429,8 @@ private void configurarCoresCabecalhosTabelas() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPlantio))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboBox_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(BackGroundLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                    .addComponent(ComboBox_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(BackGroundLayout.createSequentialGroup()
@@ -534,10 +438,6 @@ private void configurarCoresCabecalhosTabelas() {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(lblTemperatura))
                         .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackGroundLayout.createSequentialGroup()
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackGroundLayout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -552,9 +452,7 @@ private void configurarCoresCabecalhosTabelas() {
                             .addComponent(lblUmidade)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblIrrigacao)
-                        .addGap(142, 142, 142)))
+                        .addGap(257, 257, 257)))
                 .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BackGroundLayout.createSequentialGroup()
                         .addGap(95, 95, 95)
@@ -566,7 +464,7 @@ private void configurarCoresCabecalhosTabelas() {
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(logo)
                         .addGap(64, 64, 64))))
             .addGroup(BackGroundLayout.createSequentialGroup()
@@ -599,8 +497,8 @@ private void configurarCoresCabecalhosTabelas() {
                     .addComponent(lblPlantio)
                     .addComponent(lblPlanta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(BackGroundLayout.createSequentialGroup()
+                .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackGroundLayout.createSequentialGroup()
                         .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -613,20 +511,13 @@ private void configurarCoresCabecalhosTabelas() {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(58, 58, 58)
-                        .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblIrrigacao)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(BackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BackGroundLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(BackGroundLayout.createSequentialGroup()
                         .addComponent(ComboBox_Dados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)))
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -647,10 +538,6 @@ private void configurarCoresCabecalhosTabelas() {
         setSize(new java.awt.Dimension(974, 741));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-       new Tela_Historico(cliente).setVisible(true);
-    }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void listPlantioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listPlantioAncestorAdded
        
@@ -675,14 +562,6 @@ private void configurarCoresCabecalhosTabelas() {
     private void tblUmidadeInternaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblUmidadeInternaAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_tblUmidadeInternaAncestorAdded
-
-    private void tblPoximaIrrigacaoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblPoximaIrrigacaoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblPoximaIrrigacaoAncestorAdded
-
-    private void tblUltimaIrrigacaoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblUltimaIrrigacaoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblUltimaIrrigacaoAncestorAdded
 
     private void ComboBox_DadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_DadosActionPerformed
          
@@ -721,7 +600,6 @@ private void configurarCoresCabecalhosTabelas() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackGround;
     private javax.swing.JComboBox<String> ComboBox_Dados;
-    private javax.swing.JButton btnHistorico;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -731,12 +609,9 @@ private void configurarCoresCabecalhosTabelas() {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblAlertas;
     private javax.swing.JLabel lblGota;
-    private javax.swing.JLabel lblIrrigacao;
     private javax.swing.JLabel lblPlanta;
     private javax.swing.JLabel lblPlantio;
     private javax.swing.JLabel lblTemperatura;
@@ -745,10 +620,8 @@ private void configurarCoresCabecalhosTabelas() {
     private javax.swing.JList<String> listPlantio;
     private javax.swing.JLabel logo;
     private javax.swing.JTable tblAlertas;
-    private javax.swing.JTable tblPoximaIrrigacao;
     private javax.swing.JTable tblTemperaturaExterna;
     private javax.swing.JTable tblTemperaturaInterna;
-    private javax.swing.JTable tblUltimaIrrigacao;
     private javax.swing.JTable tblUmidadeExterna;
     private javax.swing.JTable tblUmidadeInterna;
     // End of variables declaration//GEN-END:variables
