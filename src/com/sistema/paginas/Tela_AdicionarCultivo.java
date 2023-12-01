@@ -129,7 +129,7 @@ public class Tela_AdicionarCultivo extends javax.swing.JFrame {
     private void btnAddCultivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCultivoActionPerformed
     	Core.adicionarCultivo(cliente,txtAddCultivo.getText());
     	new Tela_DadosCultivo(cliente,txtAddCultivo.getText()).setVisible(true); 
-    	//Main.getCore().abrirPagina(Core.PAGINA_DADOS_CULTIVO);
+    	
     	
     	dispose();
     }//GEN-LAST:event_btnAddCultivoActionPerformed

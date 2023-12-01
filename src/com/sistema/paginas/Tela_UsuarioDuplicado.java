@@ -93,7 +93,7 @@ public class Tela_UsuarioDuplicado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        //new Tela_Inicial().setVisible(true);
+      
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 

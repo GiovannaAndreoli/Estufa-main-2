@@ -107,7 +107,7 @@ public class Higrometro {
             mensagem += "Umidade do solo ideal!\n";
         }
 
-        //JOptionPane.showMessageDialog(null, mensagem);
+    
     }
     
     public ArrayList<String> getAlertas(){
@@ -147,6 +147,6 @@ public class Higrometro {
     }
 
     public void adicionarHigrometro(Higrometro higrometro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }

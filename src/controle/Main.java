@@ -83,8 +83,6 @@ public class Main {
     public static void criarUsuario(ArrayList<Cliente> clienteList) {
         Cliente cliente = new Cliente();
         cliente.cadastrarCliente();
-        //cliente.cadastrarSenha();
-        //cliente.cadastrarDataNascimento();
         clienteList.add(cliente);
         if (cliente.validarCadastro()) {
             clienteList.add(cliente);

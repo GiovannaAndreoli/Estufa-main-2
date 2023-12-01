@@ -143,7 +143,7 @@ public class Tela_Alteracao extends javax.swing.JFrame {
     }//GEN-LAST:event_listPlantioAncestorAdded
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-       //new Tela_DadosCultivo().setVisible(true);
+      
     	System.err.println(listPlantio.getSelectedValue());
     	new Tela_DadosCultivo(cliente, listPlantio.getSelectedValue()).setVisible(true);;
     	dispose();
